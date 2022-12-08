@@ -27,16 +27,28 @@ function Gallery(gallery){
       return;
     }
     modal.classList.add('open');
+    //event listeners to be bound on modal open
+    window.addEventListener('keyup', handleKeyUp);
+    nextButton.addEventListener('click', showNextImage);
   }
   function closeModal(){
     modal.classList.remove('open');
     //TODO add event listeners
+    window.removeEventListener('keyup', handleKeyUp);
+    nextButton.removeEventListener('click', showNextImage);
   }
 
   function handleClickOutside(e){
     if(e.target === e.currentTarget){
       closeModal();
     }
+  }
+  function handleKeyUp(event){
+    if(event.key === 'Escape') closeModal();
+  }
+
+  function showNextImage(){
+    showImage(currentImage.nextElementSibling);
   }
 
   function showImage(el){
